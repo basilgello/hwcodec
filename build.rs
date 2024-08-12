@@ -36,7 +36,7 @@ fn build_common(builder: &mut Build) {
         .unwrap();
 
     // system
-    #[cfg(windows)]
+    if target_os == "windows"
     {
         ["d3d11", "dxgi"].map(|lib| println!("cargo:rustc-link-lib={}", lib));
     }
@@ -45,13 +45,13 @@ fn build_common(builder: &mut Build) {
 
     // platform
     let _platform_path = common_dir.join("platform");
-    #[cfg(windows)]
+    if target_os == "windows"
     {
         let win_path = _platform_path.join("win");
         builder.include(&win_path);
         builder.file(win_path.join("win.cpp"));
     }
-    #[cfg(target_os = "linux")]
+    if target_os == "linux"
     {
         let manifest_dir = PathBuf::from(env!("CARGO_MANIFEST_DIR"));
         let externals_dir = manifest_dir.join("externals");
