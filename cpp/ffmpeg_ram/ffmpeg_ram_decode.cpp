@@ -78,7 +78,13 @@ public:
     hw_device_ctx_ = NULL;
   }
   int reset() {
-    if (name_.find("h264") != std::string::npos) {
+    if (name_.find("vp8") != std::string::npos) {
+      data_format_ = DataFormat::VP8;
+    } else if (name_.find("vp9") != std::string::npos) {
+      data_format_ = DataFormat::VP9;
+    } else if (name_.find("av1") != std::string::npos) {
+      data_format_ = DataFormat::AV1;
+    } else if (name_.find("h264") != std::string::npos) {
       data_format_ = DataFormat::H264;
     } else if (name_.find("hevc") != std::string::npos) {
       data_format_ = DataFormat::H265;
